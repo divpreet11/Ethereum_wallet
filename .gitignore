@@ -1,0 +1,13 @@
+/node_modules/*
+/package-lock.json
+/src/uploads
+/uploads
+src/config/qa.env
+src/config/dev.env
+src/config/prod.env
+src/config/dev.env
+src/config/stage.env
+src/config/local.env
+src/config/fulfill.env
+dist
+/dist

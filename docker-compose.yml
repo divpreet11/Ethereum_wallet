@@ -1,0 +1,60 @@
+version: '2'
+services:
+   rabbitui:
+      container_name: con_rabbit
+      ports:
+         - '0.0.0.0:15672:15672'
+         - '0.0.0.0:5672:5672'
+      image: rabbitmq:3.8.11-management
+      restart: always
+      volumes:
+         - '/data/dvolumes/bwb/dockerrabbit:/var/lib/rabbitmq'
+
+   redis:
+      container_name: con_redis
+      ports:
+         - 0.0.0.0:6379:6379
+      volumes:
+         - '/data/dvolumes/bwb/docker-redis:/data'
+      image: redis
+
+   # db:
+   #    image: mysql:8.0.19
+   #    restart: always
+   #    environment:
+   #       MYSQL_ROOT_PASSWORD: Admin@123
+   #       MYSQL_DATABASE: ptp_landing
+   #    volumes:
+   #       - mysql-data1:/var/lib/mysql
+   #    networks:
+   #       - my-network
+   #    ports:
+   #       - '3307:3306'
+
+   # phpmyadmin:
+   #    image: phpmyadmin/phpmyadmin:5.0.1
+   #    restart: always
+   #    environment:
+   #       PMA_HOST: db
+   #    ports:
+   #       - '8082:80'
+   #    depends_on:
+   #       - db
+   #    networks:
+   #       - my-network
+   p2p_node:
+      restart: always
+      container_name: p2p_node_c
+      build: .
+      # depends_on:
+      #    - db
+      env_file:
+         - ./src/config/local.env
+      ports:
+         - '0.0.0.0:7400:7400'
+
+volumes:
+   mysql-data1:
+
+networks:
+   my-network:

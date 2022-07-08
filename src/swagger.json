@@ -1,0 +1,255 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Test Apis",
+        "description": "Test service",
+        "version": "1.0.0"
+    },
+    "produces": ["application/json"],
+    "servers": [{
+        "url": "http://localhost:7405",
+        "description": "Development server"
+    }],
+    "components": {
+        "securitySchemes": {
+            "JWT": {
+                "type": "apiKey",
+                "name": "api-access-token",
+                "in": "header",
+                "description": "Jwt authentication to access service"
+            }
+        },
+        "schemas": {
+            "rating_details": {
+                "type": "object",
+                "properties": {
+                    "user_id": {
+                        "type": "string"
+                    },
+                    "rating": {
+                        "type": "number"
+                    },
+                    "review": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    },
+    "security": [{
+        "JWT": []
+    }],
+
+    "paths": {
+        "/ptp/user/trade/create": {
+            "post": {
+                "tags": ["User Offer"],
+                "summary": "Create offer",
+                "requestBody": {
+                    "description": "",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "type": {
+                                        "type": "number",
+                                        "description": "0=Buy, 1=Sell",
+                                        "enum": [0, 1],
+                                        "required": true
+                                    },
+                                    "data": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "type": 1,
+                                    "user_id": "123456",
+                                    "coin_id": "123456",
+                                    "address": "123456",
+                                    "balance": "123456"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Offer has been created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "string",
+                                            "description": "Offer id"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error while creating offer."
+                    }
+                }
+            }
+        },
+        "/ptp/user/trade/details": {
+            "get": {
+                "tags": ["User Offer"],
+                "summary": "Create offer",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Block details has been fetched",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "string",
+                                            "description": "Offer id"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error while creating offer."
+                    }
+                }
+            }
+        },
+        "/ptp/user/trade/status": {
+            "post": {
+                "tags": ["User Offer"],
+                "summary": "Create offer",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Offer has been created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "string",
+                                            "description": "Offer id"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error while creating offer."
+                    }
+                }
+            }
+        },
+
+        "/ptp/user/trade/read": {
+            "get": {
+                "tags": ["User account"],
+                "summary": "Read account",
+                "parameters": [{
+                    "in": "query",
+                    "name": "address",
+                    "schema": {
+                        "type": "string",
+                        "example": "0x4053624B29d6a6f6C63cE0791Ee09847Fc0AE706"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "account has been read",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "string",
+                                            "description": "user address"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error while reading offer."
+                    }
+                }
+            }
+        },
+
+        "/ptp/user/trade/transaction": {
+            "post": {
+                "tags": ["User Offer"],
+                "summary": "Create offer",
+                "requestBody": {
+                    "description": "",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "user_id": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "user_id": "0x7B0307661769dB96F3c6deBA992301BF66bb5EEF"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Offer has been created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "string",
+                                            "description": "Offer id"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error while creating offer."
+                    }
+                }
+            }
+        }
+    }
+}
